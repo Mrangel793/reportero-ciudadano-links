@@ -183,50 +183,6 @@ body::before{
   flex-shrink:0;
 }
 
-/* ---- QR card ---- */
-.qr-card{
-  margin-top:32px;
-  padding:24px;
-  border-radius:24px;
-  background:var(--navy);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:16px;
-  text-align:center;
-}
-#qrcode{
-  width:180px;
-  height:180px;
-  flex-shrink:0;
-  background:#fff;
-  padding:12px;
-  border-radius:16px;
-}
-#qrcode img, #qrcode canvas{ display:block; width:100%; height:100%; }
-.qr-text .tag{
-  font-family:'Archivo', sans-serif;
-  font-weight:800;
-  font-size:11px;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--red);
-  margin-bottom:4px;
-}
-.qr-text h2{
-  font-family:'Archivo', sans-serif;
-  font-weight:800;
-  font-size:18px;
-  color:#fff;
-  margin:0 0 4px;
-}
-.qr-text p{
-  font-size:12.5px;
-  color:#B9C2E8;
-  margin:0;
-  max-width:26ch;
-}
-
 .foot{
   margin-top:22px;
   text-align:center;
@@ -323,31 +279,8 @@ body::before{
     </a>
   </nav>
 
-  <div class="qr-card">
-    <div id="qrcode" aria-label="Codigo QR hacia esta pagina"></div>
-    <div class="qr-text">
-      <p class="tag">Comparta</p>
-      <h2>Escanee el QR</h2>
-      <p>Lleva directo a esta pagina con los cinco canales.</p>
-    </div>
-  </div>
-
   <p class="foot">El Reportero Ciudadano &middot; Santander, Colombia</p>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-  try {
-    var target = window.location.href.split('#')[0];
-    new QRCode(document.getElementById("qrcode"), {
-      text: target,
-      width: 156,
-      height: 156,
-      colorDark: "#0A1B45",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.M
-    });
-  } catch (e) {}
-</script>
 </body>
 </html>
