@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Reportero Ciudadano</title>
+<meta name="description" content="Todos los canales de El Reportero Ciudadano, periodismo ciudadano de Santander, en un solo enlace.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M28 20 C40 8, 62 8, 74 18' stroke='%231E4FD8' stroke-width='9' stroke-linecap='round' fill='none'/%3E%3Cpath d='M20 62 C10 74, 12 88, 24 92' stroke='%231E4FD8' stroke-width='9' stroke-linecap='round' fill='none'/%3E%3Crect x='26' y='30' width='24' height='34' rx='12' fill='%230A1B45'/%3E%3Crect x='22' y='40' width='20' height='16' rx='4' fill='%231E4FD8'/%3E%3C/svg%3E">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Public+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper:#F4F6FC;
+  --surface:#FFFFFF;
+  --navy:#0A1B45;
+  --ink-soft:#5C6690;
+  --blue:#1E4FD8;
+  --blue-dim:#E7ECFC;
+  --red:#E63329;
+  --line:#DBE1F3;
+  --shadow: rgba(10,27,69,0.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A1230;
+    --surface:#101B3D;
+    --navy:#EDF0FF;
+    --ink-soft:#93A0D6;
+    --blue:#5C86FF;
+    --blue-dim:#1B2657;
+    --red:#FF7466;
+    --line:#232F5E;
+    --shadow: rgba(0,0,0,0.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A1230;
+  --surface:#101B3D;
+  --navy:#EDF0FF;
+  --ink-soft:#93A0D6;
+  --blue:#5C86FF;
+  --blue-dim:#1B2657;
+  --red:#FF7466;
+  --line:#232F5E;
+  --shadow: rgba(0,0,0,0.35);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper);
+  color:var(--navy);
+  font-family:'Public Sans', ui-sans-serif, system-ui, sans-serif;
+  display:flex;
+  justify-content:center;
+  padding:52px 20px 60px;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* faint arc motif echoing the mic crescent in the mark */
+body::before{
+  content:"";
+  position:absolute;
+  top:-180px;
+  right:-220px;
+  width:520px;
+  height:520px;
+  border-radius:50%;
+  border:70px solid var(--blue-dim);
+  opacity:.6;
+  pointer-events:none;
+}
+
+.sheet{
+  width:100%;
+  max-width:480px;
+  position:relative;
+}
+
+/* ---- Header / mark ---- */
+.mark{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:22px;
+}
+.mark svg{ width:52px; height:52px; flex-shrink:0; }
+
+.wordmark{
+  font-family:'Archivo', sans-serif;
+  font-weight:900;
+  line-height:0.92;
+  font-size:clamp(26px, 6.4vw, 32px);
+  letter-spacing:-0.01em;
+  text-transform:uppercase;
+}
+.wordmark .el{ color:var(--navy); }
+.wordmark .rule{
+  display:inline-block;
+  width:22px;
+  height:4px;
+  background:var(--red);
+  margin:0 2px 5px;
+  vertical-align:middle;
+}
+.wordmark .ciudadano{ color:var(--blue); }
+
+.tagline{
+  font-size:15px;
+  color:var(--ink-soft);
+  font-weight:500;
+  margin:2px 0 30px;
+  max-width:34ch;
+  text-wrap:balance;
+}
+.tagline strong{ color:var(--navy); font-weight:700; }
+
+/* ---- Links ---- */
+.label{
+  font-family:'Archivo', sans-serif;
+  font-weight:800;
+  font-size:11.5px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin:0 0 12px 4px;
+}
+
+.links{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.link-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+  border-radius:999px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  text-decoration:none;
+  color:inherit;
+  box-shadow:0 1px 2px var(--shadow);
+  transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.link-row:hover{
+  transform:translateX(4px);
+  border-color:var(--blue);
+  box-shadow:0 4px 14px var(--shadow);
+}
+.link-row:focus-visible{
+  outline:2px solid var(--blue);
+  outline-offset:2px;
+}
+.icon-badge{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:var(--blue-dim);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.icon-badge svg{ width:21px; height:21px; color:var(--blue); }
+.link-text{ flex:1; min-width:0; }
+.link-text .name{
+  font-family:'Archivo', sans-serif;
+  font-weight:800;
+  font-size:16.5px;
+  color:var(--navy);
+}
+.link-text .desc{
+  font-size:12.5px;
+  color:var(--ink-soft);
+  margin-top:1px;
+}
+.go{
+  font-size:19px;
+  color:var(--ink-soft);
+  flex-shrink:0;
+}
+
+/* ---- QR card ---- */
+.qr-card{
+  margin-top:32px;
+  padding:24px;
+  border-radius:24px;
+  background:var(--navy);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  text-align:center;
+}
+#qrcode{
+  width:180px;
+  height:180px;
+  flex-shrink:0;
+  background:#fff;
+  padding:12px;
+  border-radius:16px;
+}
+#qrcode img, #qrcode canvas{ display:block; width:100%; height:100%; }
+.qr-text .tag{
+  font-family:'Archivo', sans-serif;
+  font-weight:800;
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:4px;
+}
+.qr-text h2{
+  font-family:'Archivo', sans-serif;
+  font-weight:800;
+  font-size:18px;
+  color:#fff;
+  margin:0 0 4px;
+}
+.qr-text p{
+  font-size:12.5px;
+  color:#B9C2E8;
+  margin:0;
+  max-width:26ch;
+}
+
+.foot{
+  margin-top:22px;
+  text-align:center;
+  font-size:12px;
+  color:var(--ink-soft);
+  font-weight:500;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .link-row{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="mark">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M28 20 C40 8, 62 8, 74 18" stroke="var(--blue)" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M20 62 C10 74, 12 88, 24 92" stroke="var(--blue)" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <rect x="26" y="30" width="24" height="34" rx="12" fill="var(--navy)"/>
+      <rect x="22" y="40" width="20" height="16" rx="4" fill="var(--blue)"/>
+      <circle cx="28" cy="48" r="2.4" fill="#fff"/>
+      <circle cx="34" cy="48" r="2.4" fill="#fff"/>
+      <circle cx="40" cy="48" r="2.4" fill="#fff"/>
+      <rect x="34" y="64" width="4" height="12" fill="var(--navy)"/>
+      <rect x="27" y="74" width="18" height="5" rx="2.5" fill="var(--navy)"/>
+    </svg>
+    <div class="wordmark">
+      <div class="el">EL<span class="rule"></span></div>
+      <div>REPORTERO</div>
+      <div class="ciudadano">CIUDADANO</div>
+    </div>
+  </div>
+
+  <p class="tagline">Periodismo ciudadano de <strong>Santander</strong>. Todos nuestros canales, en un solo enlace.</p>
+
+  <p class="label">Nuestros canales</p>
+
+  <nav class="links">
+    <a class="link-row" href="https://www.instagram.com/elreporterosantander?igsi=ODhnMHg3Z2FjOGRn&utm_source=qr" target="_blank" rel="noopener">
+      <span class="icon-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </span>
+      <span class="link-text">
+        <span class="name">Instagram</span>
+        <span class="desc">Fotos, historias y reels del dia a dia</span>
+      </span>
+      <span class="go">&rarr;</span>
+    </a>
+
+    <a class="link-row" href="https://www.facebook.com/share/1BdHyeAk9Y/?mibextid=wwXIfr" target="_blank" rel="noopener">
+      <span class="icon-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 21v-7.2h2.4l.4-2.9h-2.8V9.1c0-.85.24-1.43 1.46-1.43h1.56V5.08C17.2 5.02 16.3 4.9 15.24 4.9c-2.2 0-3.7 1.34-3.7 3.8v2.2H9.1v2.9h2.44V21"/></svg>
+      </span>
+      <span class="link-text">
+        <span class="name">Facebook</span>
+        <span class="desc">Comunidad, en vivo y noticias al minuto</span>
+      </span>
+      <span class="go">&rarr;</span>
+    </a>
+
+    <a class="link-row" href="https://x.com/elrepoterosan?s=11&t=P89_Hl22tR8zdLDWA-ZscA" target="_blank" rel="noopener">
+      <span class="icon-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M13.9 10.4 20.2 3h-1.5l-5.5 6.4L8.8 3H3.5l6.6 9.6L3.5 21h1.5l5.8-6.8L15.2 21h5.3l-6.6-10.6Zm-2 2.3-.7-1L5.9 4.1h2.3l4.3 6.1.7 1 5.6 8h-2.3l-4.6-6.5Z"/></svg>
+      </span>
+      <span class="link-text">
+        <span class="name">X (Twitter)</span>
+        <span class="desc">Ultima hora y actualizacion en tiempo real</span>
+      </span>
+      <span class="go">&rarr;</span>
+    </a>
+
+    <a class="link-row" href="https://www.tiktok.com/@elreporterosantan" target="_blank" rel="noopener">
+      <span class="icon-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16.6 3c.4 2.4 2 4 4.4 4.2v3.1c-1.6.1-3-.4-4.4-1.3v6.4c0 3.5-2.9 6.1-6.3 5.7-2.9-.3-5.1-2.8-5-5.8.1-3 2.7-5.4 5.8-5.2v3.2c-1.3-.2-2.5.7-2.7 1.9-.2 1.3.7 2.5 1.9 2.7 1.4.2 2.7-.9 2.7-2.4V3h3.6Z"/></svg>
+      </span>
+      <span class="link-text">
+        <span class="name">TikTok</span>
+        <span class="desc">Videos cortos y coberturas al instante</span>
+      </span>
+      <span class="go">&rarr;</span>
+    </a>
+
+    <a class="link-row" href="https://www.youtube.com/@ElReporteroSantander" target="_blank" rel="noopener">
+      <span class="icon-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.2 15 12l-4.7 2.8Z" fill="currentColor" stroke="none"/></svg>
+      </span>
+      <span class="link-text">
+        <span class="name">YouTube</span>
+        <span class="desc">Reportajes, entrevistas y transmisiones</span>
+      </span>
+      <span class="go">&rarr;</span>
+    </a>
+  </nav>
+
+  <div class="qr-card">
+    <div id="qrcode" aria-label="Codigo QR hacia esta pagina"></div>
+    <div class="qr-text">
+      <p class="tag">Comparta</p>
+      <h2>Escanee el QR</h2>
+      <p>Lleva directo a esta pagina con los cinco canales.</p>
+    </div>
+  </div>
+
+  <p class="foot">El Reportero Ciudadano &middot; Santander, Colombia</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  try {
+    var target = window.location.href.split('#')[0];
+    new QRCode(document.getElementById("qrcode"), {
+      text: target,
+      width: 156,
+      height: 156,
+      colorDark: "#0A1B45",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } catch (e) {}
+</script>
+</body>
+</html>
